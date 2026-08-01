@@ -138,3 +138,46 @@ Administrator: Windows PowerShell
 This confirmed that PowerShell was running with elevated privileges.
 
 Running PowerShell as Administrator allowed the Sysmon installation command to be executed successfully in the next step.
+
+---
+
+## Step 5: Navigate to the Sysmon Folder
+
+After opening PowerShell as Administrator, I navigated to the folder where the Sysmon files were stored.
+
+The Sysmon files were located in:
+
+```text
+C:\Tools
+```
+
+I used the following command to change into the `C:\Tools` directory:
+
+```powershell
+cd C:\Tools
+```
+
+After changing directories, I confirmed that the Sysmon files were present by running:
+
+```powershell
+dir
+```
+
+The expected files included:
+
+```text
+Sysmon.exe
+Sysmon64.exe
+Sysmon64a.exe
+Eula.txt
+sysmonconfig-export.xml
+```
+
+The most important files for this installation were:
+
+| File | Purpose |
+|---|---|
+| `Sysmon64.exe` | The 64-bit Sysmon executable used for installation |
+| `sysmonconfig-export.xml` | The configuration file applied during installation |
+
+Confirming the files were present helped ensure that the Sysmon installation command would run from the correct directory.
