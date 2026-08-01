@@ -181,3 +181,30 @@ The most important files for this installation were:
 | `sysmonconfig-export.xml` | The configuration file applied during installation |
 
 Confirming the files were present helped ensure that the Sysmon installation command would run from the correct directory.
+
+---
+
+## Step 6: Install Sysmon
+
+After confirming that the Sysmon files and configuration file were located in `C:\Tools`, I installed Sysmon using PowerShell as Administrator.
+
+The installation command used was:
+
+```powershell
+.\Sysmon64.exe -accepteula -i .\sysmonconfig-export.xml
+```
+
+### Command Breakdown
+
+| Command Part | Purpose |
+|---|---|
+| `.\Sysmon64.exe` | Runs the 64-bit Sysmon executable from the current folder |
+| `-accepteula` | Accepts the Sysmon license agreement |
+| `-i` | Installs Sysmon as a Windows service |
+| `.\sysmonconfig-export.xml` | Applies the Sysmon configuration file during installation |
+
+After running the command, Sysmon installed as a Windows service and started monitoring activity on the endpoint.
+
+PowerShell displayed installation output showing that Sysmon was installed, the Sysmon driver was installed, and the Sysmon service was started.
+
+This step completed the actual Sysmon installation process and applied the configuration file so that Sysmon could begin generating endpoint telemetry.
