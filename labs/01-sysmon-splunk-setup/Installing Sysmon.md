@@ -112,3 +112,29 @@ For this lab, the configuration file was used during the Sysmon installation com
 ```
 
 This command installed Sysmon and applied the configuration file at the same time.
+
+---
+
+## Step 4: Open PowerShell as Administrator
+
+PowerShell was opened with Administrator privileges so Sysmon could be installed as a Windows service and driver.
+
+Administrator privileges are required because Sysmon needs permission to install and run in the background on the Windows endpoint.
+
+To open PowerShell as Administrator:
+
+1. Click the Windows Start menu.
+2. Search for `PowerShell`.
+3. Right-click **Windows PowerShell**.
+4. Select **Run as administrator**.
+5. Click **Yes** if prompted by User Account Control.
+
+After opening PowerShell as Administrator, the window title showed:
+
+```text
+Administrator: Windows PowerShell
+```
+
+This confirmed that PowerShell was running with elevated privileges.
+
+Running PowerShell as Administrator allowed the Sysmon installation command to be executed successfully in the next step.
