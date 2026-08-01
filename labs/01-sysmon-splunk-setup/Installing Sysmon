@@ -1,1 +1,141 @@
-Step 1 Installed Sysmon
+Step 1: Windows VM Setup
+
+A Windows 10 virtual machine was created in VirtualBox to act as the monitored endpoint for this SOC lab.
+
+The VM was renamed to:
+
+WIN-SOC-01
+
+This hostname makes the logs easier to identify in Splunk.
+
+Step 2: Sysmon Installation
+
+Sysmon was downloaded from Microsoft Sysinternals and placed in the following directory:
+
+C:\Tools
+
+The folder included the Sysmon executable and configuration file:
+
+Sysmon64.exe
+sysmonconfig-export.xml
+
+Sysmon was installed using PowerShell as Administrator:
+
+cd C:\Tools
+.\Sysmon64.exe -accepteula -i .\sysmonconfig-export.xml
+Command Explanation
+Command Part	Purpose
+Sysmon64.exe	Runs the 64-bit Sysmon executable
+-accepteula	Accepts the Sysmon license agreement
+-i	Installs Sysmon as a Windows service
+sysmonconfig-export.xml	Applies the Sysmon configuration file
+Step 3: Verified Sysmon Service
+
+After installation, I verified that Sysmon was running with the following command:
+
+Get-Service Sysmon64
+
+Expected result:
+
+Status   Name      DisplayName
+------   ----      -----------
+Running  Sysmon64  Sysmon64
+
+This confirmed that Sysmon was installed and actively running on the Windows endpoint.
+
+Step 4: Verified Sysmon Logs in Event Viewer
+
+I opened Windows Event Viewer and navigated to:
+
+Applications and Services Logs
+→ Microsoft
+→ Windows
+→ Sysmon
+→ Operational
+
+This confirmed that Sysmon events were being generated locally on the Windows VM.
+
+Step 5: Splunk Enterprise Installation
+
+Splunk Enterprise Free was installed on the Windows VM and accessed through the local web interface:
+
+http://localhost:8000
+
+Splunk was used as the SIEM/log analysis platform for this lab.
+
+Step 6: Configured Splunk to Ingest Sysmon Logs
+
+Splunk was configured to ingest the Sysmon Operational log.
+
+The log source used was:
+
+WinEventLog:Microsoft-Windows-Sysmon/Operational
+
+If the Sysmon log source does not appear in Splunk automatically, it can be manually added using the inputs.conf file.
+
+Location:
+
+C:\Program Files\Splunk\etc\system\local\inputs.conf
+
+Example configuration:
+
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+disabled = 0
+index = main
+sourcetype = XmlWinEventLog
+renderXml = true
+
+After editing inputs.conf, Splunk can be restarted with:
+
+cd "C:\Program Files\Splunk\bin"
+.\splunk.exe restart
+Step 7: Verified Sysmon Logs in Splunk
+
+To confirm that Splunk was receiving Sysmon logs, I searched for the Sysmon log source:
+
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational"
+
+The search returned events from:
+
+host = WIN-SOC-01
+source = WinEventLog:Microsoft-Windows-Sysmon/Operational
+sourcetype = XmlWinEventLog
+
+This confirmed that Sysmon logs were successfully being ingested into Splunk.
+
+Step 8: Generated a Test Process Event
+
+To verify process creation logging, I opened PowerShell and launched Notepad:
+
+notepad.exe
+
+Then I searched for the event in Splunk:
+
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational" notepad
+
+The event showed that notepad.exe was launched and recorded by Sysmon.
+
+Observed Event Details
+
+The Notepad event included useful process creation details such as:
+
+Field	Description
+Host	The Windows endpoint that generated the event
+User	The account that launched the process
+Image	The executable that ran
+CommandLine	The command used to launch the process
+ParentImage	The process that launched the child process
+EventID	The Sysmon event type
+
+Example observed activity:
+
+Image: C:\Windows\System32\notepad.exe
+CommandLine: notepad.exe
+ParentImage: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User: WIN-SOC-01\soclab
+EventID: 1
+Result
+
+Sysmon was successfully installed and configured on the Windows VM. Splunk successfully ingested Sysmon Operational logs, allowing endpoint activity to be searched and analyzed.
+
+This completed the foundational logging pipeline needed for future SOC analyst detection labs.
