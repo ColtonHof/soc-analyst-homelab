@@ -27,3 +27,12 @@ Search for:
 
 ```text
 Sysmon Microsoft Sysinternals
+
+## Step 2: Create a Tools Folder
+
+A tools directory was created on the Windows VM to store Sysmon and its configuration file.
+
+I created the folder using PowerShell:
+
+```powershell
+mkdir C:\Tools
