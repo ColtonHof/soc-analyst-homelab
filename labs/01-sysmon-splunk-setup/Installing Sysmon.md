@@ -73,6 +73,10 @@ Sysmon64.exe
 
 This folder was used to keep the Sysmon executable and configuration file in one organized location before installing Sysmon.
 
+### Screenshot: Sysmon Files in Tools Folder
+
+![Sysmon Files in Tools Folder](screenshots/sysmon-tools-folder.png)
+
 ## Step 3: Download a Sysmon Configuration File
 
 Sysmon can run with a default configuration, but using a configuration file improves the quality of the telemetry collected.
