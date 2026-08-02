@@ -240,3 +240,43 @@ Windows VM activity → Sysmon → Windows Event Logs → Splunk
 
 ![Splunk Local Event Log Collection](screenshots/splunk-local-event-log-collection.png)
 
+---
+
+## Step 7: Verify Sysmon Logs Are Searchable in Splunk
+
+After configuring Splunk to ingest the Sysmon Operational log, I verified that the logs were searchable in Splunk.
+
+In Splunk, I opened the **Search & Reporting** app and searched for the Sysmon log source:
+
+```spl
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational"
+```
+
+The search returned Sysmon events from the Windows VM.
+
+The results showed:
+
+```text
+host = WIN-SOC-01
+source = WinEventLog:Microsoft-Windows-Sysmon/Operational
+sourcetype = XmlWinEventLog
+```
+
+This confirmed that Splunk was successfully receiving and indexing Sysmon logs from the Windows endpoint.
+
+### Why This Step Matters
+
+This step verifies that the full logging pipeline is working:
+
+```text
+Windows VM activity → Sysmon → Windows Event Logs → Splunk → Search results
+```
+
+Without this verification, Sysmon may be installed and generating logs locally, but there would be no proof that Splunk is actually ingesting them.
+
+Confirming that Sysmon logs are searchable in Splunk completes the setup needed for future detection labs.
+
+### Screenshot: Sysmon Logs Searchable in Splunk
+
+![Sysmon Logs Searchable in Splunk](screenshots/sysmon-logs-searchable-in-splunk.png)
+
