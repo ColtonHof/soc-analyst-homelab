@@ -78,3 +78,32 @@ Default settings are acceptable for this lab because:
 ### Screenshot: Splunk Installer
 
 ![Splunk Installer](screenshots/splunk-installer.png)
+
+---
+
+## Step 3: Configure Splunk Admin Account
+
+During the Splunk Enterprise installation process, I was prompted to create an administrator account for the Splunk web interface.
+
+This account is used to log in to Splunk and manage the local Splunk instance.
+
+For this lab, I created a local Splunk administrator account during setup.
+
+```text
+Username: admin
+Password: [password created during installation]
+```
+
+The password is not documented in this repository for security reasons.
+
+### Why This Step Matters
+
+The Splunk administrator account is needed to:
+
+- Log in to the Splunk web interface
+- Configure data inputs
+- Manage indexes
+- Search and analyze logs
+- Restart or manage Splunk services if needed
+
+After creating the admin account, the installer continued the setup process and prepared Splunk Enterprise to run locally on the Windows VM.
