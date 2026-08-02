@@ -135,6 +135,9 @@ Verifying access to the Splunk web interface confirms that:
 - The Search & Reporting app is available for log analysis
 
 ---
+### Screenshot: Splunk Home Dashboard
+
+![Splunk Home Dashboard](screenshots/splunk-home-dashboard.png)
 
 ## Step 5: Verify Splunk Service Status
 
@@ -187,6 +190,4 @@ Being able to check, start, and restart Splunk from PowerShell is helpful when t
 ### Screenshot: Splunk Service Status
 
 ![Splunk Service Status](screenshots/splunk-service-status.png)
-### Screenshot: Splunk Home Dashboard
 
-![Splunk Home Dashboard](screenshots/splunk-home-dashboard.png)
