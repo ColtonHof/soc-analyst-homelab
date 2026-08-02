@@ -209,6 +209,12 @@ The installation command used was:
 
 After running the command, Sysmon installed as a Windows service and started monitoring activity on the endpoint.
 
+I then verified the installation by running the command Get-Service Sysmon64 
+
+### Screenshot: Sysmon Service Running
+
+![Sysmon Service Running](screenshots/sysmon-service-running.png)
+
 PowerShell displayed installation output showing that Sysmon was installed, the Sysmon driver was installed, and the Sysmon service was started.
 
 This step completed the actual Sysmon installation process and applied the configuration file so that Sysmon could begin generating endpoint telemetry.
