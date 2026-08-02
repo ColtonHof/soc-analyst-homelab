@@ -134,6 +134,59 @@ Verifying access to the Splunk web interface confirms that:
 - The administrator account works
 - The Search & Reporting app is available for log analysis
 
+---
+
+## Step 5: Verify Splunk Service Status
+
+After confirming that the Splunk web interface loaded successfully, I verified that Splunk was running from the command line.
+
+Splunk command-line tools are located in:
+
+```text
+C:\Program Files\Splunk\bin
+```
+
+I opened PowerShell as Administrator and navigated to the Splunk `bin` directory:
+
+```powershell
+cd "C:\Program Files\Splunk\bin"
+```
+
+Then I checked the Splunk service status:
+
+```powershell
+.\splunk.exe status
+```
+
+This command verifies whether Splunk is currently running.
+
+If Splunk is stopped, it can be started with:
+
+```powershell
+.\splunk.exe start
+```
+
+If configuration changes are made, Splunk can be restarted with:
+
+```powershell
+.\splunk.exe restart
+```
+
+### Why This Step Matters
+
+Verifying Splunk from the command line is useful because some configuration changes require Splunk to be restarted before they take effect.
+
+This is especially important when editing files such as:
+
+```text
+C:\Program Files\Splunk\etc\system\local\inputs.conf
+```
+
+Being able to check, start, and restart Splunk from PowerShell is helpful when troubleshooting log ingestion issues.
+
+### Screenshot: Splunk Service Status
+
+![Splunk Service Status](screenshots/splunk-service-status.png)
 ### Screenshot: Splunk Home Dashboard
 
 ![Splunk Home Dashboard](screenshots/splunk-home-dashboard.png)
