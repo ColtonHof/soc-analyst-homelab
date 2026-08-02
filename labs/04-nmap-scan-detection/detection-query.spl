@@ -1,0 +1,4 @@
+index=main source="C:\\Windows\\System32\\LogFiles\\Firewall\\pfirewall.log"
+| rex field=_raw "^(?<date>\d{4}-\d{2}-\d{2}) (?<time>\d{2}:\d{2}:\d{2}) (?<action>\w+) (?<protocol>\w+) (?<src_ip>\S+) (?<dst_ip>\S+) (?<src_port>\S+) (?<dst_port>\S+)"
+| stats count dc(dst_port) as unique_ports values(dst_port) as scanned_ports by src_ip, dst_ip, action, protocol
+| where unique_ports >= 10
