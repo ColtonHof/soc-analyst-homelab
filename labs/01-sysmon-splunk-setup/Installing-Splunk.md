@@ -191,3 +191,117 @@ Being able to check, start, and restart Splunk from PowerShell is helpful when t
 
 ![Splunk Service Status](screenshots/splunk-service-status.png)
 
+---
+
+## Step 6: Configure Splunk to Ingest Sysmon Logs
+
+After confirming that Splunk Enterprise was installed and running, I configured Splunk to ingest Sysmon logs from the Windows VM.
+
+The Sysmon log source used in this lab was:
+
+```text
+Microsoft-Windows-Sysmon/Operational
+```
+
+In Splunk, I navigated to:
+
+```text
+Settings → Data Inputs → Local Event Log Collection
+```
+
+From there, I selected Windows Event Logs to ingest into Splunk.
+
+The main log source for this lab was:
+
+```text
+WinEventLog:Microsoft-Windows-Sysmon/Operational
+```
+
+This source contains Sysmon events such as process creation, network connections, file creation, and DNS queries.
+
+### Manual Configuration Option
+
+If the Sysmon log source does not appear in the Splunk web interface, it can be manually added using the `inputs.conf` file.
+
+The file is located at:
+
+```text
+C:\Program Files\Splunk\etc\system\local\inputs.conf
+```
+
+The following configuration can be added:
+
+```ini
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+disabled = 0
+index = main
+sourcetype = XmlWinEventLog
+renderXml = true
+```
+
+After editing `inputs.conf`, Splunk must be restarted for the changes to take effect:
+
+```powershell
+cd "C:\Program Files\Splunk\bin"
+.\splunk.exe restart
+```
+
+### Why This Step Matters
+
+This step connects Sysmon telemetry to Splunk. Without this input, Sysmon may be generating logs locally in Event Viewer, but Splunk would not be able to search or analyze them.
+
+Ingesting Sysmon logs into Splunk allows analysts to investigate endpoint activity using SPL searches.
+
+### Screenshot: Splunk Local Event Log Collection
+
+![Splunk Local Event Log Collection](screenshots/splunk-local-event-log-collection.png)
+
+---
+
+## Step 6: Configure Splunk to Ingest Windows and Sysmon Logs
+
+After confirming that Splunk Enterprise was installed and accessible, I configured Splunk to ingest Windows Event Logs from the local Windows VM.
+
+In Splunk, I navigated to:
+
+```text
+Settings → Data Inputs → Local Event Log Collection
+```
+
+From the Event Log Collections page, I selected the logs that I wanted Splunk to collect from the local machine.
+
+The selected logs included:
+
+```text
+Application
+Microsoft-Windows-Sysmon/Operational
+Security
+System
+```
+
+The most important log source for this lab was:
+
+```text
+Microsoft-Windows-Sysmon/Operational
+```
+
+This log contains Sysmon telemetry, including process creation, network connections, file creation, and other endpoint activity useful for SOC analysis.
+
+The index was left as the default Splunk index configuration for this local lab environment.
+
+### Why This Step Matters
+
+Sysmon may generate logs locally in Windows Event Viewer, but Splunk cannot search those logs until they are added as a data input.
+
+Configuring local event log collection allows Splunk to ingest endpoint telemetry from the Windows VM and make it searchable using SPL queries.
+
+This step connects the logging pipeline:
+
+```text
+Windows VM activity → Sysmon → Windows Event Logs → Splunk
+```
+
+### Screenshot: Splunk Local Event Log Collection
+
+![Splunk Local Event Log Collection](screenshots/splunk-local-event-log-collection.png)
+
