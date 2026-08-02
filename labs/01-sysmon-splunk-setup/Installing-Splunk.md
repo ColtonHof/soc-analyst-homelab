@@ -43,3 +43,38 @@ Splunk Enterprise was used because it provides a web interface for searching and
 ### Screenshot: Splunk Enterprise Download Page
 
 ![Splunk Enterprise Download Page](screenshots/splunk-enterprise-download-page.png)
+
+## Step 2: Run the Splunk Installer
+
+After downloading the Windows 64-bit `.msi` installer, I opened the installer to begin the Splunk Enterprise installation process.
+
+The installer was launched from the Downloads folder on the Windows 10 VM.
+
+During the installation, I accepted the license agreement and continued with the default installation options.
+
+### Installation Notes
+
+For this lab, Splunk Enterprise was installed directly on the Windows VM. This made the setup easier because the Windows endpoint and Splunk instance were running on the same machine.
+
+The default installation path was used:
+
+```text
+C:\Program Files\Splunk
+```
+
+Using the default path makes it easier to locate Splunk files, configuration folders, and command-line tools later in the lab.
+
+### Why Default Options Were Used
+
+The default installation options were selected because this was a beginner SOC home lab. The goal was to get Splunk running locally so Windows and Sysmon logs could be ingested and searched.
+
+Default settings are acceptable for this lab because:
+
+- The environment is local and isolated
+- Only one Windows VM is being monitored
+- The setup is for learning and testing
+- Advanced deployment configuration is not required yet
+
+### Screenshot: Splunk Installer
+
+![Splunk Installer](screenshots/splunk-installer.png)
