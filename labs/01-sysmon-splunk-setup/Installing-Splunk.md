@@ -107,3 +107,33 @@ The Splunk administrator account is needed to:
 - Restart or manage Splunk services if needed
 
 After creating the admin account, the installer continued the setup process and prepared Splunk Enterprise to run locally on the Windows VM.
+
+---
+
+## Step 4: Verify Splunk Web Interface Access
+
+After the installation completed, Splunk Enterprise was accessed through the local web interface.
+
+```text
+http://localhost:8000
+```
+
+I logged in using the Splunk administrator account created during installation.
+
+The Splunk home dashboard loaded successfully, confirming that Splunk Enterprise was installed and running on the Windows VM.
+
+From the Splunk home dashboard, I was able to access the **Search & Reporting** app, which is used to search, filter, and analyze ingested logs.
+
+### Why This Step Matters
+
+Verifying access to the Splunk web interface confirms that:
+
+- Splunk Enterprise installed successfully
+- The Splunk web service is running
+- The local Splunk instance is reachable through the browser
+- The administrator account works
+- The Search & Reporting app is available for log analysis
+
+### Screenshot: Splunk Home Dashboard
+
+![Splunk Home Dashboard](screenshots/splunk-home-dashboard.png)
