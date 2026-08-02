@@ -206,12 +206,10 @@ If this detection triggered in a real SOC environment, the analyst should:
 7. Escalate or isolate the host if the activity appears malicious.
 
 ---
-
 ## Screenshots
 
 Add screenshots below after saving them in the `screenshots` folder.
 
-```markdown
 ### Screenshot: PowerShell Test Command
 
 ![PowerShell Test Command](screenshots/powershell-test-command.png)
@@ -219,7 +217,6 @@ Add screenshots below after saving them in the `screenshots` folder.
 ### Screenshot: Suspicious PowerShell Detection Result
 
 ![Suspicious PowerShell Detection Result](screenshots/suspicious-powershell-detection-result.png)
-```
 
 ---
 
