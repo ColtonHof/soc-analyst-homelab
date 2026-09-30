@@ -190,7 +190,6 @@ If this detection triggered in a real SOC environment, the analyst should:
 
 ## Screenshots
 
-Add screenshots below after saving them in the `screenshots` folder.
 
 ### Screenshot: Failed Login Search
 
